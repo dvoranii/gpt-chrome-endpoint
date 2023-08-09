@@ -1,13 +1,17 @@
-const bodyParser = require("body-parser");
-const fetch = require("node-fetch");
+import bodyParser from "body-parser";
+import fetch from "node-fetch";
+import express from "express";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/engines/davinci/completions";
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
-const express = require("express");
 const app = express();
 
 app.use(bodyParser.json());
+
+app.get("/", (req, res) => {
+  res.send("Hello, this is the root endpoint!");
+});
 
 app.post("/api/chat", async (req, res) => {
   const highlightedText = req.body.highlightedText;
