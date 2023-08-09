@@ -1,17 +1,13 @@
-const express = require("express");
 const bodyParser = require("body-parser");
 const fetch = require("node-fetch");
 
+const OPENAI_API_URL = "https://api.openai.com/v1/engines/davinci/completions";
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+
+const express = require("express");
 const app = express();
 
 app.use(bodyParser.json());
-
-const OPENAI_API_URL = "https://api.openai.com/v1/engines/davinci/completions";
-const OPENAI_API_KEY = process.env.OPEN_API_KEY;
-
-app.get("/", (req, res) => {
-  res.send("Server is running.");
-});
 
 app.post("/api/chat", async (req, res) => {
   const highlightedText = req.body.highlightedText;
@@ -51,7 +47,4 @@ app.post("/api/chat", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+module.exports = app;
